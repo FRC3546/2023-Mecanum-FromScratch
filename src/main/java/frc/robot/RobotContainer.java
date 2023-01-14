@@ -9,10 +9,12 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 // import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.DriveForwardCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.MecanumControllerCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -65,5 +67,10 @@ public class RobotContainer {
         .onTrue(new InstantCommand(() -> m_robotDrive.zeroHeading()));
   }
 
+  public Command getAutonomousCommand() {
+    return new SequentialCommandGroup(
+      new DriveForwardCommand(m_robotDrive)
+    );
+  }
 
 }
