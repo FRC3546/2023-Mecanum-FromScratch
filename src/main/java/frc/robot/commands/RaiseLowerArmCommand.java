@@ -4,24 +4,27 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class DriveForwardCommand extends CommandBase {
+public class RaiseLowerArmCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   
-  private final DrivetrainSubsystem m_driveSubsystem;
+  private final ArmSubsystem m_armSubsystem;
+  private final boolean isRaised;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveForwardCommand(DrivetrainSubsystem subsystem) {
+  public RaiseLowerArmCommand(ArmSubsystem subsystem, boolean isRaisedParameter) {
     
-    m_driveSubsystem = subsystem;
+    m_armSubsystem = subsystem;
+    isRaised = isRaisedParameter;
 
-    addRequirements(m_driveSubsystem);
+
+    addRequirements(m_armSubsystem);
   }
 
   @Override
@@ -29,12 +32,24 @@ public class DriveForwardCommand extends CommandBase {
  
   @Override
   public void execute() {
-    m_driveSubsystem.drive(0, 0.5, 0, true);
+    
+    if(isRaised == true){
+        m_armSubsystem.RaiseArm();
+    }
+
+    if(isRaised == false){
+        m_armSubsystem.LowerArm();
+    }
+
+    else{
+        System.out.println("No value for RaiseLowerArmCommand");
+    }
+
   }
 
   @Override
   public void end(boolean interrupted) {
-    m_driveSubsystem.drive(0, 0, 0, false);
+    ;
   }
 
   @Override

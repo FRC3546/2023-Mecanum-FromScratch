@@ -4,24 +4,26 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class DriveForwardCommand extends CommandBase {
+public class ClampArmCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   
-  private final DrivetrainSubsystem m_driveSubsystem;
+  private final ArmSubsystem m_armSubsystem;
+  private final boolean open;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveForwardCommand(DrivetrainSubsystem subsystem) {
+  public ClampArmCommand(ArmSubsystem subsystem, boolean openParameter) {
     
-    m_driveSubsystem = subsystem;
+    m_armSubsystem = subsystem;
+    open = openParameter;
 
-    addRequirements(m_driveSubsystem);
+    addRequirements(m_armSubsystem);
   }
 
   @Override
@@ -29,12 +31,25 @@ public class DriveForwardCommand extends CommandBase {
  
   @Override
   public void execute() {
-    m_driveSubsystem.drive(0, 0.5, 0, true);
+
+    if(open == true){
+        m_armSubsystem.OpenClamp();
+    }
+
+    if(open == false){
+        m_armSubsystem.CloseClamp();
+    }
+
+    else{
+        System.out.print("No value for ClampArmCommand");
+    }
+
+
   }
 
   @Override
   public void end(boolean interrupted) {
-    m_driveSubsystem.drive(0, 0, 0, false);
+    ;
   }
 
   @Override

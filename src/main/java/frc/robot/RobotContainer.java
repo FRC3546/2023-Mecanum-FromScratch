@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.DriveForwardCommand;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.MecanumControllerCommand;
@@ -21,8 +22,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 public class RobotContainer {
+  
   // The robot's subsystems
   private final DrivetrainSubsystem m_robotDrive = new DrivetrainSubsystem();
+  private final ArmSubsystem m_robotArm = new ArmSubsystem();
 
 
   
@@ -65,6 +68,18 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, Button.kLeftBumper.value)
         .onTrue(new InstantCommand(() -> m_robotDrive.zeroHeading()));
+
+    new JoystickButton(m_driverController, 1)
+        .onTrue(new InstantCommand(() -> m_robotArm.OpenClamp()));
+    
+    new JoystickButton(m_driverController, 2)
+        .onTrue(new InstantCommand(() -> m_robotArm.CloseClamp()));
+    
+    new JoystickButton(m_driverController, 3)
+        .onTrue(new InstantCommand(() -> m_robotArm.RaiseArm()));
+
+    new JoystickButton(m_driverController, 4)
+        .onTrue(new InstantCommand(() -> m_robotArm.LowerArm()));
   }
 
   public Command getAutonomousCommand() {
