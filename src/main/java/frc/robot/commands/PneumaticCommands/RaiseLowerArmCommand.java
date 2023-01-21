@@ -2,26 +2,27 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.PneumaticCommands;
 
 import frc.robot.subsystems.ArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ClampArmCommand extends CommandBase {
+public class RaiseLowerArmCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   
   private final ArmSubsystem m_armSubsystem;
-  private final boolean open;
+  private final boolean isRaised;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ClampArmCommand(ArmSubsystem subsystem, boolean openParameter) {
+  public RaiseLowerArmCommand(ArmSubsystem subsystem, boolean isRaisedParameter) {
     
     m_armSubsystem = subsystem;
-    open = openParameter;
+    isRaised = isRaisedParameter;
+
 
     addRequirements(m_armSubsystem);
   }
@@ -31,19 +32,18 @@ public class ClampArmCommand extends CommandBase {
  
   @Override
   public void execute() {
-
-    if(open == true){
-        m_armSubsystem.OpenClamp();
+    
+    if(isRaised == true){
+        m_armSubsystem.RaiseArm();
     }
 
-    if(open == false){
-        m_armSubsystem.CloseClamp();
+    if(isRaised == false){
+        m_armSubsystem.LowerArm();
     }
 
     else{
-        System.out.print("No value for ClampArmCommand");
+        System.out.println("No value for RaiseLowerArmCommand");
     }
-
 
   }
 
