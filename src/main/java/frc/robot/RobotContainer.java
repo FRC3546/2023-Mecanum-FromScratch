@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
 
@@ -33,6 +34,7 @@ public class RobotContainer {
 //   Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
 
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+  Trigger xButton = new JoystickButton(m_driverController, XboxController.Button.kX.value);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -61,25 +63,26 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Drive at half speed when the right bumper is held
-    new JoystickButton(m_driverController, Button.kRightBumper.value)
-        .onTrue(new InstantCommand(() -> m_robotDrive.setMaxOutput(0.5)))
-        .onFalse(new InstantCommand(() -> m_robotDrive.setMaxOutput(1)));
 
     new JoystickButton(m_driverController, Button.kLeftBumper.value)
         .onTrue(new InstantCommand(() -> m_robotDrive.zeroHeading()));
 
-    new JoystickButton(m_driverController, 1)
-        .onTrue(new InstantCommand(() -> m_robotArm.OpenClamp()));
+    // Drive at half speed when the right bumper is held
+    new JoystickButton(m_driverController, Button.kRightBumper.value)
+        .onTrue(new InstantCommand(() -> m_robotDrive.setMaxOutput(0.5)))
+        .onFalse(new InstantCommand(() -> m_robotDrive.setMaxOutput(1)));
     
-    new JoystickButton(m_driverController, 2)
-        .onTrue(new InstantCommand(() -> m_robotArm.CloseClamp()));
-    
-    new JoystickButton(m_driverController, 3)
-        .onTrue(new InstantCommand(() -> m_robotArm.RaiseArm()));
+    new JoystickButton(m_driverController, Button.kA.value)
+        .onTrue(new InstantCommand(() -> m_robotArm.OpenClamp()))
+        .onFalse(new InstantCommand(() -> m_robotArm.CloseClamp()));
 
-    new JoystickButton(m_driverController, 4)
+
+    new JoystickButton(m_driverController, Button.kX.value)
+        .toggleOnTrue(new InstantCommand(() -> m_robotArm.toggleArm()));
+
+    new JoystickButton(m_driverController, Button.kY.value)
         .onTrue(new InstantCommand(() -> m_robotArm.LowerArm()));
+
   }
 
   public Command getAutonomousCommand() {

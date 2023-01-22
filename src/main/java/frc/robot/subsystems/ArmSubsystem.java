@@ -41,6 +41,10 @@ public class ArmSubsystem extends SubsystemBase {
         raiseArmSolenoid.set(Value.kReverse);
         armRaised = false;
     }
+
+    public void toggleArm(){
+        raiseArmSolenoid.toggle();
+    }
 }
 
     
