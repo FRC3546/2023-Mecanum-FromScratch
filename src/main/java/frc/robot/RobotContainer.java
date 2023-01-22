@@ -34,7 +34,6 @@ public class RobotContainer {
 //   Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
 
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
-  Trigger xButton = new JoystickButton(m_driverController, XboxController.Button.kX.value);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
