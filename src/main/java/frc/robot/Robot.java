@@ -6,7 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 
 // Commands
 import frc.robot.commands.DrivetrainCommands.DriveForwardCommand;
@@ -28,12 +30,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
   
-  private Command m_autonomousCommand;
+  private ArmSubsystem m_ArmSubsystem;
+  private DrivetrainSubsystem m_DrivetrainSubsystem;
 
   private RobotContainer m_robotContainer;
 
-  CommandBase m_autonomousCommand;
+  private CommandBase m_autonomousCommand;
 	SendableChooser<CommandBase> autonChooser = new SendableChooser<CommandBase>();
+
+
 
   
 
@@ -47,8 +52,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    autonChooser.setDefaultOption("Drive forward", new DriveForwardCommand());
-    autonChooser.addOption("arm raise", new RaiseLowerArmCommand(true))
+    autonChooser.setDefaultOption("Drive forward", new DriveForwardCommand(m_DrivetrainSubsystem));
+    autonChooser.addOption("arm raise", new RaiseLowerArmCommand(m_ArmSubsystem, true));
 
     SmartDashboard.putData("Autonomous options", autonChooser);
 
