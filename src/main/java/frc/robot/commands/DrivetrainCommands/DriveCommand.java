@@ -8,39 +8,68 @@ import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.Timer;
 
-public class DriveForwardCommand extends CommandBase {
+
+public class DriveCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   
   private final DrivetrainSubsystem m_driveSubsystem;
+
+  private final Timer timer = new Timer();
+
+  private final double time;
+
+  private final double xSpeed;
+  private final double ySpeed;
+  private final double rotation;
+  private final boolean fieldRelative;
+
+
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveForwardCommand() {
+  public DriveCommand(double xSpeed, double ySpeed, double rotation, double driveTime, boolean fieldRelative) {
+    
+    this.xSpeed = xSpeed;
+    this.ySpeed = ySpeed;
+    this.rotation = rotation;
+    this.fieldRelative = fieldRelative;
     
     m_driveSubsystem = RobotContainer.m_robotDrive;
+
+    time = driveTime;
 
     addRequirements(m_driveSubsystem);
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+    
+    timer.reset();
+  	timer.start();
+  }
  
   @Override
   public void execute() {
-    m_driveSubsystem.drive(0, 0.5, 0, true);
+
+    m_driveSubsystem.drive(xSpeed, ySpeed, rotation, fieldRelative);
+
   }
 
   @Override
   public void end(boolean interrupted) {
     m_driveSubsystem.drive(0, 0, 0, false);
+    timer.reset();
   }
 
   @Override
   public boolean isFinished() {
-    return false;
+
+    return timer.get() >= time;
+
   }
 }

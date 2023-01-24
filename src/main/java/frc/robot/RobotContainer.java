@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 // import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.DrivetrainCommands.DriveForwardCommand;
+import frc.robot.commands.DrivetrainCommands.DriveCommand;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -81,10 +81,10 @@ public class RobotContainer {
 
   }
 
-  public Command getAutonomousCommand() {
-    return new SequentialCommandGroup(
-      new DriveForwardCommand()
-    );
-  }
+  // public Command getAutonomousCommand() {
+  //   return new SequentialCommandGroup(
+  //     new DriveForwardCommand(2)
+  //   );
+  // }
 
 }
