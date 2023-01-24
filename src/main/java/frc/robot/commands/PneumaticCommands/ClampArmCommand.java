@@ -4,6 +4,8 @@
 
 package frc.robot.commands.PneumaticCommands;
 
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.ArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -13,14 +15,15 @@ public class ClampArmCommand extends CommandBase {
   private final ArmSubsystem m_armSubsystem;
   private final boolean open;
 
+  
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ClampArmCommand(ArmSubsystem subsystem, boolean openParameter) {
+  public ClampArmCommand(boolean openParameter) {
     
-    m_armSubsystem = subsystem;
+    m_armSubsystem = RobotContainer.m_robotArm;
     open = openParameter;
 
     addRequirements(m_armSubsystem);

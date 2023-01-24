@@ -22,8 +22,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   
   // The robot's subsystems
-  private final DrivetrainSubsystem m_robotDrive = new DrivetrainSubsystem();
-  private final ArmSubsystem m_robotArm = new ArmSubsystem();
+  public static DrivetrainSubsystem m_robotDrive = new DrivetrainSubsystem();
+  public static ArmSubsystem m_robotArm = new ArmSubsystem();
 
 
   
@@ -83,7 +83,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
-      new DriveForwardCommand(m_robotDrive)
+      new DriveForwardCommand()
     );
   }
 

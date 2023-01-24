@@ -30,9 +30,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
   
-  private ArmSubsystem m_ArmSubsystem;
-  private DrivetrainSubsystem m_DrivetrainSubsystem;
-
   private RobotContainer m_robotContainer;
 
   private CommandBase m_autonomousCommand;
@@ -52,8 +49,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    autonChooser.setDefaultOption("Drive forward", new DriveForwardCommand(m_DrivetrainSubsystem));
-    autonChooser.addOption("arm raise", new RaiseLowerArmCommand(m_ArmSubsystem, true));
+    autonChooser.setDefaultOption("Drive forward", new DriveForwardCommand());
+    autonChooser.addOption("arm raise", new RaiseLowerArmCommand(true));
 
     SmartDashboard.putData("Autonomous options", autonChooser);
 

@@ -4,6 +4,8 @@
 
 package frc.robot.commands.DrivetrainCommands;
 
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -17,9 +19,9 @@ public class DriveForwardCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveForwardCommand(DrivetrainSubsystem subsystem) {
+  public DriveForwardCommand() {
     
-    m_driveSubsystem = subsystem;
+    m_driveSubsystem = RobotContainer.m_robotDrive;
 
     addRequirements(m_driveSubsystem);
   }

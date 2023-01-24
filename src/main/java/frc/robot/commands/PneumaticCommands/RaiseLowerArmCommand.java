@@ -4,6 +4,8 @@
 
 package frc.robot.commands.PneumaticCommands;
 
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.ArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -18,9 +20,9 @@ public class RaiseLowerArmCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public RaiseLowerArmCommand(ArmSubsystem subsystem, boolean isRaisedParameter) {
+  public RaiseLowerArmCommand(boolean isRaisedParameter) {
     
-    m_armSubsystem = subsystem;
+    m_armSubsystem = RobotContainer.m_robotArm;
     isRaised = isRaisedParameter;
 
 
