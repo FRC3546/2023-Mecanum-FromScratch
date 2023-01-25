@@ -30,7 +30,9 @@ public class RaiseLowerArmCommand extends CommandBase {
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("Raise Lower Arm Command Initialized");
+  }
  
   @Override
   public void execute() {

@@ -14,16 +14,25 @@ public class PickUpCommand extends SequentialCommandGroup{
 
     public PickUpCommand(){
         
+
+        addCommands(
+            new SequentialCommandGroup(
+                new ClampArmCommand(false)
+                )); // opens arm
+        
         addCommands(
             new ParallelCommandGroup(
-                new DriveCommand(0.5, 0, 0, 3, true), // drive to gamepiece
-                new RaiseLowerArmCommand(false), // lowers arm
-                new ClampArmCommand(true) // opens arm
+                new DriveCommand(0, 0.5, 0, 1, true), // drive to gamepiece
+                new RaiseLowerArmCommand(false) // lowers arm
             ));
 
-        addCommands(new ClampArmCommand(false)); // closes arm around gamepiece
-        addCommands(new RaiseLowerArmCommand(true)); // raises gamepiece
-        addCommands(new DriveCommand(-0.5, 0, 0, 3, true)); // drives backwards
+
+        addCommands(
+            new SequentialCommandGroup(
+                new ClampArmCommand(false), // closes arm around gamepiece
+                new RaiseLowerArmCommand(true), // raises gamepiece
+                new DriveCommand(0, -0.5, 0, 1, true)
+            )); // drives backwards
 
     }
 

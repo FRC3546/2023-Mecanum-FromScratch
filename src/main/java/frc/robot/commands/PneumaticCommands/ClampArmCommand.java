@@ -30,7 +30,9 @@ public class ClampArmCommand extends CommandBase {
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("Clamp Arm Command Initializing");
+  }
  
   @Override
   public void execute() {
@@ -39,7 +41,7 @@ public class ClampArmCommand extends CommandBase {
         m_armSubsystem.OpenClamp();
     }
 
-    if(open == false){
+    else if(open == false){
         m_armSubsystem.CloseClamp();
     }
 

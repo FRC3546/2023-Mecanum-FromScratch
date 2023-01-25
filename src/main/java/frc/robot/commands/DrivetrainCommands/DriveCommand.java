@@ -48,7 +48,7 @@ public class DriveCommand extends CommandBase {
 
   @Override
   public void initialize() {
-    
+    System.out.println("Drive Command initialized");
     timer.reset();
   	timer.start();
   }
