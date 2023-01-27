@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import frc.robot.Robot;
 
 import frc.robot.commands.DrivetrainCommands.DriveCommand;
@@ -15,24 +16,20 @@ public class PickUpCommand extends SequentialCommandGroup{
     public PickUpCommand(){
         
 
-        addCommands(
-            new SequentialCommandGroup(
-                new ClampArmCommand(false)
-                )); // opens arm
+        addCommands(new ClampArmCommand(true)); // opens arm
         
         addCommands(
-            new ParallelCommandGroup(
-                new DriveCommand(0, 0.5, 0, 1, true), // drive to gamepiece
+            new ParallelDeadlineGroup(
+                new DriveCommand(0.5, 0, 0, 3, true), // drive to gamepiece
                 new RaiseLowerArmCommand(false) // lowers arm
             ));
 
 
         addCommands(
-            new SequentialCommandGroup(
                 new ClampArmCommand(false), // closes arm around gamepiece
                 new RaiseLowerArmCommand(true), // raises gamepiece
-                new DriveCommand(0, -0.5, 0, 1, true)
-            )); // drives backwards
+                new DriveCommand(-0.5, 0, 0, 3, true)
+            ); // drives backwards
 
     }
 
