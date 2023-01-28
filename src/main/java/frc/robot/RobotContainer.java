@@ -46,8 +46,8 @@ public class RobotContainer {
             () ->
                 m_robotDrive.drive(
                     m_driverController.getLeftX(),
-                    -m_driverController.getLeftY(),
-                    m_driverController.getRightX(),
+                    m_driverController.getLeftY(),
+                    m_driverController.getRawAxis(2),
                     true),
             m_robotDrive));
   }
@@ -60,7 +60,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(m_driverController, Button.kLeftBumper.value)
+    new JoystickButton(m_driverController, Button.kA.value)
         .onTrue(new InstantCommand(() -> m_robotDrive.zeroHeading()));
 
     // Drive at half speed when the right bumper is held
@@ -68,9 +68,9 @@ public class RobotContainer {
         .onTrue(new InstantCommand(() -> m_robotDrive.setMaxOutput(0.5)))
         .onFalse(new InstantCommand(() -> m_robotDrive.setMaxOutput(1)));
     
-    new JoystickButton(m_driverController, Button.kA.value)
-        .onTrue(new InstantCommand(() -> m_robotArm.OpenClamp()))
-        .onFalse(new InstantCommand(() -> m_robotArm.CloseClamp()));
+    // new JoystickButton(m_driverController, Button.kA.value)
+    //     .onTrue(new InstantCommand(() -> m_robotArm.OpenClamp()))
+    //     .onFalse(new InstantCommand(() -> m_robotArm.CloseClamp()));
 
 
     new JoystickButton(m_driverController, Button.kX.value)

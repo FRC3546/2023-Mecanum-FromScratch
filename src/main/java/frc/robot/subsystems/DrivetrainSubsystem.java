@@ -48,7 +48,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     @SuppressWarnings("ParameterName")
     public void drive(double ySpeed, double xSpeed, double rot, boolean fieldRelative) {
         if (fieldRelative) {
-          m_drive.driveCartesian(xSpeed, ySpeed, Math.pow(rot, 3)*.3, new Rotation2d((gyro.getAngle()*Math.PI)/180));
+          m_drive.driveCartesian(xSpeed, ySpeed, rot, new Rotation2d((gyro.getAngle()*Math.PI)/180));
         } else {
           // m_drive.driveCartesian(ySpeed, xSpeed, Math.pow(rot, 3))
           System.out.println("gyro failure");
