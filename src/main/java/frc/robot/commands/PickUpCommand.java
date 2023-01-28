@@ -20,7 +20,7 @@ public class PickUpCommand extends SequentialCommandGroup{
         
         addCommands(
             new ParallelDeadlineGroup(
-                new DriveCommand(0.5, 0, 0, 3, true), // drive to gamepiece
+                new DriveCommand(0, 0.5, 0, 3, true), // drive to gamepiece
                 new RaiseLowerArmCommand(false) // lowers arm
             ));
 
@@ -28,7 +28,7 @@ public class PickUpCommand extends SequentialCommandGroup{
         addCommands(
                 new ClampArmCommand(false), // closes arm around gamepiece
                 new RaiseLowerArmCommand(true), // raises gamepiece
-                new DriveCommand(-0.5, 0, 0, 3, true)
+                new DriveCommand(0, -0.5, 0, 3, true)
             ); // drives backwards
 
     }
