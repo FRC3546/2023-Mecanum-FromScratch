@@ -12,6 +12,7 @@ import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.ctre.phoenix.sensors.CANCoder;
 
 // gyro imports
 import com.kauailabs.navx.frc.AHRS;
@@ -26,6 +27,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final VictorSP m_rearRight = new VictorSP(DriveConstants.kRearRightMotorPort);
   
     private static final AHRS gyro = DriveConstants.gyro;
+    private static final CANCoder encoder = new CANCoder(0);
   
   
     private final MecanumDrive m_drive =
@@ -48,6 +50,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     @SuppressWarnings("ParameterName")
     public void drive(double ySpeed, double xSpeed, double rot, boolean fieldRelative) {
         if (fieldRelative) {
+            System.out.println(encoder.getAbsolutePosition());
           m_drive.driveCartesian(xSpeed, ySpeed, rot, new Rotation2d((gyro.getAngle()*Math.PI)/180));
         } else {
           // m_drive.driveCartesian(ySpeed, xSpeed, Math.pow(rot, 3))
