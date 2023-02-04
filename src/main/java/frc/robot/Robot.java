@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 // Commands
 import frc.robot.commands.DrivetrainCommands.DriveCommand;
-import frc.robot.commands.PneumaticCommands.ClampArmCommand;
-import frc.robot.commands.PneumaticCommands.RaiseLowerArmCommand;
-import frc.robot.commands.PickUpCommand;
+// import frc.robot.commands.PneumaticCommands.ClampArmCommand;
+// import frc.robot.commands.PneumaticCommands.RaiseLowerArmCommand;
+// import frc.robot.commands.PickUpCommand;
 
-// Subsystems
-import frc.robot.subsystems.ArmSubsystem;
+// // Subsystems
+// import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -51,8 +51,8 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     autonChooser.setDefaultOption("Drive forward", new DriveCommand(.5,0,0,2,true));
-    autonChooser.addOption("arm raise", new RaiseLowerArmCommand(true));
-    autonChooser.addOption("James' Special", new PickUpCommand());
+    // autonChooser.addOption("arm raise", new RaiseLowerArmCommand(true));
+    // autonChooser.addOption("James' Special", new PickUpCommand());
 
     SmartDashboard.putData("Autonomous options", autonChooser);
 

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 // import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.DrivetrainCommands.DriveCommand;
-import frc.robot.subsystems.ArmSubsystem;
+// import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -23,7 +23,7 @@ public class RobotContainer {
   
   // The robot's subsystems
   public static DrivetrainSubsystem m_robotDrive = new DrivetrainSubsystem();
-  public static ArmSubsystem m_robotArm = new ArmSubsystem();
+  // public static ArmSubsystem m_robotArm = new ArmSubsystem();
 
 
   
@@ -73,11 +73,11 @@ public class RobotContainer {
     //     .onFalse(new InstantCommand(() -> m_robotArm.CloseClamp()));
 
 
-    new JoystickButton(m_driverController, Button.kX.value)
-        .toggleOnTrue(new InstantCommand(() -> m_robotArm.toggleArm()));
+    // new JoystickButton(m_driverController, Button.kX.value)
+    //     .toggleOnTrue(new InstantCommand(() -> m_robotArm.toggleArm()));
 
-    new JoystickButton(m_driverController, Button.kY.value)
-        .onTrue(new InstantCommand(() -> m_robotArm.LowerArm()));
+    // new JoystickButton(m_driverController, Button.kY.value)
+    //     .onTrue(new InstantCommand(() -> m_robotArm.LowerArm()));
 
   }
 

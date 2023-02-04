@@ -12,7 +12,17 @@ import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+// import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.sensors.CANCoder;
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
+// import com.revrobotics.CANSparkMax;
+// import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+
 
 // gyro imports
 import com.kauailabs.navx.frc.AHRS;
@@ -27,8 +37,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final VictorSP m_rearRight = new VictorSP(DriveConstants.kRearRightMotorPort);
   
     private static final AHRS gyro = DriveConstants.gyro;
-    private static final CANCoder encoder = new CANCoder(0);
-  
+    // private static final CANCoder encoder = new CANCoder(0);
+    
+    private static final TalonSRX versa = new TalonSRX(41);
+
+    // private static final CANSparkMax neo = new CANSparkMax(28, MotorType.kBrushless);
+
+    
   
     private final MecanumDrive m_drive =
         new MecanumDrive(m_frontLeft, m_rearLeft, m_frontRight, m_rearRight);
@@ -41,6 +56,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
         m_rearRight.setInverted(true);
         m_frontLeft.setInverted(false);
         m_rearLeft.setInverted(false);
+
+        versa.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
     }
 
     @Override
@@ -50,7 +67,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
     @SuppressWarnings("ParameterName")
     public void drive(double ySpeed, double xSpeed, double rot, boolean fieldRelative) {
         if (fieldRelative) {
-            System.out.println(encoder.getAbsolutePosition());
+            // System.out.println(encoder.getAbsolutePosition());
+            System.out.println(versa.getSelectedSensorPosition());
+            // neo.set(0.1);
+
           m_drive.driveCartesian(xSpeed, ySpeed, rot, new Rotation2d((gyro.getAngle()*Math.PI)/180));
         } else {
           // m_drive.driveCartesian(ySpeed, xSpeed, Math.pow(rot, 3))
